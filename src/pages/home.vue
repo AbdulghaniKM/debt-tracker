@@ -16,5 +16,15 @@
 <script setup lang="ts">
   import { useCounterStore } from '../stores/counter';
   import AppButton from '../components/AppButton.vue';
+  import api from "../plugins/axios.ts";
+  import {onMounted} from "vue";
   const context = useCounterStore();
+  onMounted(
+      async () => {
+        const response = await api.get('/students')
+        const reaponse2 = await api.get('/subjects')
+        console.log(response.data)
+        console.log(reaponse2.data)
+      }
+  )
 </script>
