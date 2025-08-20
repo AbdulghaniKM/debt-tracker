@@ -1,12 +1,13 @@
 <template>
-    <div class="flex flex-row gap-2 hover:bg-yellow-600/50 transition-all transition-discrete bg-yellow-500 rounded-xl p-2 items-center justify-center">
+    <motion.div :whileHover="{ scale: 1.05, transition: { duration: 0.05, ease: 'easeOut' } }" class="flex flex-row gap-2 hover:bg-teal-600/80 transition-all transition-discrete text-white bg-teal-600 rounded-xl p-2 items-center justify-center">
       <Icon :icon="icon"/>
       <p>
         {{ buttonText }}
       </p>
-    </div>
+    </motion.div>
 </template>
 <script setup lang="ts">
+  import {motion} from "motion-v";
   import {Icon } from '@iconify/vue'
   defineProps({
     buttonText: {
