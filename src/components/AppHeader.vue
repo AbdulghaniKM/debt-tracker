@@ -37,10 +37,18 @@
           :animate="{ opacity: 1, scaleY: 1 }"
           :exit="{ opacity: 0, scaleY: 0 }"
           :transition="{ type: 'spring', stiffness: 200, damping: 20 }"
-          class="origin-top flex flex-col items-center justify-center w-full absolute top-[100%] bg-teal-800 overflow-hidden"
+          class="origin-top h-40 flex flex-col items-center justify-center w-full absolute top-[100%] bg-teal-800 overflow-hidden"
       >
-        <div class="p-4 text-white">
-          This is a new menu animation
+        <div class="p-4 flex flex-row items-center justify-center  ">
+          <ul class="flex flex-row items-center justify-center gap-6">
+            <motion.li :whileHover="{
+              scale: 1.05,
+              transition: { duration: 0.25, ease: 'easeOut' }
+            }" v-for="(item, index) in navIems" class="flex px-6 transition-colors duration-100 py-2 rounded-3xl  flex-row items-center gap-2 border  cursor-pointer"  :class="route.fullPath === item.route ? 'text-teal-100 bg-teal-500 hover:bg-teal-600 border-teal-50' : 'bg-teal-50 border-teal-400 text-teal-800 hover:bg-teal-100'" :key="index">
+              <Icon :icon="item.icon" class="text-2xl"/>
+              <p class="text-xl">{{item.text}}</p>
+            </motion.li>
+          </ul>
         </div>
       </motion.div>
     </AnimatePresence>
@@ -48,10 +56,41 @@
 </template>
 
 <script setup lang="ts">
+import {useRoute} from "vue-router";
 import { motion, AnimatePresence } from "motion-v"
 import { Icon } from "@iconify/vue"
 import { ref } from "vue"
 
 const isOpen = ref(false)
 const isHover = ref(false)
+const route = useRoute()
+console.log()
+const navIems = [
+  {
+    icon: 'hugeicons:home-03',
+    text: 'Home',
+    route: '/'
+  },
+  {
+    icon: 'hugeicons:backpack-03',
+    text: 'Students',
+    route: '/students'
+  },
+  {
+    icon: 'hugeicons:student',
+    text: 'Best Students',
+    route: '/best-students'
+  },
+  {
+    icon: 'hugeicons:book-bookmark-02',
+    text: 'Subjects',
+    route: '/subjects'
+  },
+  {
+    icon: 'hugeicons:information-circle',
+    text: 'About',
+    route: '/about'
+  },
+]
+
 </script>
