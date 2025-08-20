@@ -14,7 +14,7 @@
               @click="isOpen = !isOpen"
               @mouseover="isHover = true"
               @mouseleave="isHover = false"
-              :whileHover="{ scale: 1.03, transition: { duration: 0.25, ease: 'easeOut' } }"
+              :whileHover="{ scale: 1.05, transition: { duration: 0.25, ease: 'easeOut' } }"
               :whileTap="{ scale: 0.97 }"
               class="bg-teal-100 p-2 flex flex-row items-center rounded-xl cursor-pointer"
           >
@@ -41,10 +41,7 @@
       >
         <div class="p-4 flex flex-row items-center justify-center  ">
           <ul class="flex flex-row items-center justify-center gap-6">
-            <motion.li :whileHover="{
-              scale: 1.05,
-              transition: { duration: 0.25, ease: 'easeOut' }
-            }" v-for="(item, index) in navIems" class="flex px-6 transition-colors duration-100 py-2 rounded-3xl  flex-row items-center gap-2 border  cursor-pointer"  :class="route.fullPath === item.route ? 'text-teal-100 bg-teal-500 hover:bg-teal-600 border-teal-50' : 'bg-teal-50 border-teal-400 text-teal-800 hover:bg-teal-100'" :key="index">
+            <motion.li  :whileHover="{ scale: 1.05, transition: { duration: 0.25, ease: 'easeOut' } }" v-for="(item, index) in navIems" class="flex px-6 transition-colors duration-100 py-2 rounded-3xl  flex-row items-center gap-2 border  cursor-pointer" :class="route.fullPath === item.route ? 'text-teal-100 bg-teal-500 hover:bg-teal-600 border-teal-50' : 'bg-teal-50 border-teal-400 text-teal-800 hover:bg-teal-100'" :key="index">
               <Icon :icon="item.icon" class="text-2xl"/>
               <p class="text-xl">{{item.text}}</p>
             </motion.li>
