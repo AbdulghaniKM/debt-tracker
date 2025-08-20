@@ -9,3 +9,6 @@ export const useRedirect = () => {
 
   return { redirectTo };
 };
+
+
+export const getCurrentRoute = () => useRouter().currentRoute.value.path;
