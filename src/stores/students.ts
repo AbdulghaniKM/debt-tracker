@@ -5,15 +5,15 @@ import type {IStudents} from "../types";
 
 export const useStudentsStore = defineStore('students', ()=> {
     const students = ref<IStudents[]>([])
-
+    const student = ref<IStudents | null>(null)
     const getStudents = async () => {
         students.value = await studentsService.getStudents();
     }
 
     const getStudentById = async (studentid: number) => {
-        students.value = await studentsService.getStudentById(studentid);
+        student.value = await studentsService.getStudentById(studentid);
     }
 
 
-    return { students, getStudents,getStudentById }
+    return { students,student, getStudents,getStudentById }
 })

@@ -8,20 +8,28 @@
         students in the our organization are high level students!
       </p>
 
+      <input type="text" class="border border-teal-800 rounded-xl p-2" placeholder="Search Students" v-model="searchTerm"></input>
       <div>
-        {{ studentsStore.students}}
+        {{ filteredStudents }}
       </div>
+
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {onMounted} from "vue";
+import {onMounted, ref, computed} from "vue";
 import {useStudentsStore} from "../stores/students";
+import {search} from "../utils";
+const searchTerm = ref('')
+const filteredStudents = computed(() => search(studentsStore.students, searchTerm.value));
 
 const studentsStore = useStudentsStore()
 
+const getAllStudents = async () => {
+  await studentsStore.getStudents();
+}
 onMounted(() => {
-  studentsStore.getStudentById(1)
+  getAllStudents();
 })
 </script>

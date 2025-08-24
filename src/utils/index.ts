@@ -12,3 +12,6 @@ export const useRedirect = () => {
 
 
 export const getCurrentRoute = () => useRouter().currentRoute.value.path;
+
+export const search = (array: any[], value: string) =>
+    array.filter(item => Object.values(item).some(v => v != null && v.toString().toLowerCase().includes(value)))
