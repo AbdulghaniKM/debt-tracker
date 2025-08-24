@@ -8,7 +8,7 @@
         the next generation of school systems
       </p>
       <div class="flex flex-row items-center justify-center gap-6">
-        <AppButton @click="$router.push({path: '/', hash: '#learn-more'})" buttonText="Get Started" icon="hugeicons:graduation-scroll"/>
+        <AppButton @click="$router.push({path: '/students'})" buttonText="View Students" icon="hugeicons:graduation-scroll"/>
         <AppButton variant="outline" buttonText="Learn More" icon="hugeicons:dashboard-square-02"/>
       </div>
       <div id="learn-more" class="my-20 flex h-auto flex-row w-full rounded-3xl bg-teal-100 py-12 justify-start px-12 gap-4">
@@ -44,17 +44,5 @@
 </template>
 
 <script setup lang="ts">
-  import { useCounterStore } from '../stores/counter';
   import AppButton from '../components/AppButton.vue';
-  import api from "../plugins/axios.ts";
-  import {onMounted} from "vue";
-  const context = useCounterStore();
-  onMounted(
-      async () => {
-        const response = await api.get('/students')
-        const reaponse2 = await api.get('/subjects')
-        console.log(response.data)
-        console.log(reaponse2.data)
-      }
-  )
 </script>
