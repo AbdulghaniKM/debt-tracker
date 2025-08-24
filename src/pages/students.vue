@@ -9,10 +9,8 @@
       </p>
 
       <input type="text" class="border border-teal-800 rounded-xl p-2" placeholder="Search Students" v-model="searchTerm"></input>
-      <div>
-        {{ filteredStudents }}
-      </div>
 
+      <AppTable :data="filteredStudents" :headers="headers"/>
     </div>
   </div>
 </template>
@@ -21,9 +19,10 @@
 import {onMounted, ref, computed} from "vue";
 import {useStudentsStore} from "../stores/students";
 import {search} from "../utils";
+import AppTable from "../components/AppTable.vue";
 const searchTerm = ref('')
 const filteredStudents = computed(() => search(studentsStore.students, searchTerm.value));
-
+const headers = ['ID','Name', 'Age', 'Gender', 'Stage', 'Absents', 'Special?', 'Subjects']
 const studentsStore = useStudentsStore()
 
 const getAllStudents = async () => {
