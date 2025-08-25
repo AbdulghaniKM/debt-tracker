@@ -1,7 +1,7 @@
 <template>
   <table class="min-w-full border-collapse shadow-lg overflow-hidden rounded-2xl">
     <thead class="bg-teal-100">
-    <tr>
+    <tr class="text-nowrap">
       <th
           v-for="(h, index) in headers"
           :key="index"
@@ -15,7 +15,7 @@
     </tr>
     </thead>
 
-    <tbody class="bg-white">
+    <tbody class="bg-white w-full">
     <tr v-if="data.length === 0">
       <td :colspan="headers.length" class="text-center py-10 text-teal-800 text-xl">
         <div class="flex flex-col items-center justify-center gap-4">
@@ -29,18 +29,18 @@
         v-else
         v-for="(row, rowIndex) in data"
         :key="rowIndex"
-        class="hover:bg-teal-50 text-center transition-colors"
+        class="hover:bg-teal-50 border-b border-gray-200 text-center transition-colors"
     >
       <td
           v-for="(h, cellIndex) in headers"
           :key="cellIndex"
-          class="px-6 py-4 border-b border-gray-200"
+          class="px-6 py-4  text-nowrap"
       >
         {{ formatters[h.key] ? formatters[h.key](row[h.key]) : row[h.key] }}
       </td>
 
       <!-- actions slot -->
-      <td v-if="$slots.actions" class="px-6 flex flex-row gap-4 py-4 border-b border-gray-200">
+      <td v-if="$slots.actions" class="px-6 flex flex-row gap-4 py-4 ">
         <slot name="actions" :row="row"></slot>
       </td>
     </tr>

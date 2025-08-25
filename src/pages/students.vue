@@ -15,7 +15,7 @@
         <AppTable :formatters="{gender: (val) => val === 0 ? 'Male' : 'Female', isNerd: (val) => val === true ? 'High' : 'Normal', subjects: (val) => val.length}" :data="filteredStudents" :headers="headers">
           <template  #actions="{ row }">
             <AppButton icon="hugeicons:delete-02" @click="removeStudent(row.id)" icon-only variant="danger" />
-            <AppButton icon="hugeicons:view"  icon-only variant="info" />
+            <AppButton icon="hugeicons:view" @click="viewStudent(row.id)" icon-only variant="info" />
           </template>
         </AppTable>
       </div>
@@ -26,11 +26,10 @@
 <script setup lang="ts">
 import {onMounted, ref, computed} from "vue";
 import {useStudentsStore} from "../stores/students";
-import {search} from "../utils";
+import {search, useNavigate} from "../utils";
 import AppTable from "../components/AppTable.vue";
 import AppInput from "../components/AppInput.vue";
 import AppButton from "../components/AppButton.vue";
-
 const searchTerm = ref('')
 const filteredStudents = computed(() => search(studentsStore.students, searchTerm.value));
 const headers = [
@@ -44,7 +43,7 @@ const headers = [
   { key: 'subjects', label: 'Subjects' },
 ]
 const studentsStore = useStudentsStore()
-
+const {navigator} = useNavigate()
 const getAllStudents = async () => {
   await studentsStore.getStudents();
 }
@@ -52,6 +51,10 @@ const getAllStudents = async () => {
 const removeStudent = async (id: number) => {
   await studentsStore.deleteStudent(id);
 }
+const viewStudent = (id: number) => {
+  navigator('/students/' + id)
+}
+
 onMounted(() => {
   getAllStudents();
 })

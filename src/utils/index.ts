@@ -1,13 +1,12 @@
-import { useRouter } from 'vue-router';
+import {useRouter} from 'vue-router';
 
-export const useRedirect = () => {
-  const router = useRouter();
 
-  const redirectTo = (route: string) => {
-    router.push(route);
-  };
-
-  return { redirectTo };
+export const useNavigate = () => {
+    const router = useRouter();
+    const navigator = (route: string) => {
+        router.push(route);
+    };
+    return { navigator };
 };
 
 
