@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.14",
+    "@vueuse/components": "^13.7.0",
     "@vueuse/core": "^13.1.0",
     "axios": "^1.8.4",
     "motion-v": "^1.0.0-beta.1",

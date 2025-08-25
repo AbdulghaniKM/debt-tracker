@@ -31,7 +31,7 @@
     </header>
 
     <AnimatePresence>
-      <motion.div
+      <motion.div v-on-click-outside="() => isOpen = false"
           v-if="isOpen || isHover"
           :initial="{ opacity: 0, scaleY: 0 }"
           :animate="{ opacity: 1, scaleY: 1 }"
@@ -41,7 +41,7 @@
       >
         <div class="p-4 flex flex-row items-center justify-center  ">
           <ul class="flex flex-row items-center justify-center gap-6">
-            <motion.li @click="navigator(item.route)"  :whileHover="{ scale: 1.05, transition: { duration: 0.25, ease: 'easeOut' } }" v-for="(item, index) in navIems" class="flex px-6 transition-colors duration-100 py-2 rounded-3xl  flex-row items-center gap-2 border  cursor-pointer" :class="getCurrentRoute() === item.route ? 'text-teal-100 bg-teal-500 hover:bg-teal-600 border-teal-50' : 'bg-teal-50 border-teal-400 text-teal-800 hover:bg-teal-100'" :key="index">
+            <motion.li @click="navigator(item.route)"  :whileHover="{ scale: 1.05, transition: { duration: 0.25, ease: 'easeOut' } }" v-for="(item, index) in navItems" class="flex px-6 transition-colors duration-100 py-2 rounded-3xl  flex-row items-center gap-2 border  cursor-pointer" :class="getCurrentRoute() === item.route ? 'text-teal-100 bg-teal-500 hover:bg-teal-600 border-teal-50' : 'bg-teal-50 border-teal-400 text-teal-800 hover:bg-teal-100'" :key="index">
               <Icon :icon="item.icon" class="text-2xl"/>
               <p class="text-xl">{{item.text}}</p>
             </motion.li>
@@ -57,12 +57,13 @@ import {getCurrentRoute, useNavigate} from "../utils";
 import { motion, AnimatePresence } from "motion-v"
 import { Icon } from "@iconify/vue"
 import { ref } from "vue"
+import { vOnClickOutside } from "@vueuse/components";
 
 const isOpen = ref(false)
 const isHover = ref(false)
 const {navigator} = useNavigate()
 console.log()
-const navIems = [
+const navItems = [
   {
     icon: 'hugeicons:home-03',
     text: 'Home',
