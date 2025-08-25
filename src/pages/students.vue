@@ -8,9 +8,12 @@
         students in the our organization are high level students!
       </p>
 
-      <input type="text" class="border border-teal-800 rounded-xl p-2" placeholder="Search Students" v-model="searchTerm"></input>
-
-      <AppTable :data="filteredStudents" :headers="headers"/>
+      <div class="mt-12 flex flex-col items-center gap-6">
+        <div class="w-full">
+          <AppInput label="Search for a Student" type="text" placeholder="Search Students" v-model="searchTerm"/>
+        </div>
+        <AppTable :data="filteredStudents" :headers="headers"/>
+      </div>
     </div>
   </div>
 </template>
@@ -20,6 +23,7 @@ import {onMounted, ref, computed} from "vue";
 import {useStudentsStore} from "../stores/students";
 import {search} from "../utils";
 import AppTable from "../components/AppTable.vue";
+import AppInput from "../components/AppInput.vue";
 const searchTerm = ref('')
 const filteredStudents = computed(() => search(studentsStore.students, searchTerm.value));
 const headers = ['ID','Name', 'Age', 'Gender', 'Stage', 'Absents', 'Special?', 'Subjects']
