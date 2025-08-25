@@ -13,10 +13,9 @@
           <AppInput label="Search for a Student" type="text" placeholder="Search Students" v-model="searchTerm"/>
         </div>
         <AppTable :formatters="{gender: (val) => val === 0 ? 'Male' : 'Female', isNerd: (val) => val === true ? 'High' : 'Normal', subjects: (val) => val.length}" :data="filteredStudents" :headers="headers">
-
           <template  #actions="{ row }">
-            <AppButton icon="hugeicons:delete-02" @click="" icon-only variant="danger" />
-            <AppButton icon="hugeicons:view" icon-only variant="info" />
+            <AppButton icon="hugeicons:delete-02" @click="removeStudent(row.id)" icon-only variant="danger" />
+            <AppButton icon="hugeicons:view"  icon-only variant="info" />
           </template>
         </AppTable>
       </div>
@@ -31,6 +30,7 @@ import {search} from "../utils";
 import AppTable from "../components/AppTable.vue";
 import AppInput from "../components/AppInput.vue";
 import AppButton from "../components/AppButton.vue";
+
 const searchTerm = ref('')
 const filteredStudents = computed(() => search(studentsStore.students, searchTerm.value));
 const headers = [
@@ -47,6 +47,10 @@ const studentsStore = useStudentsStore()
 
 const getAllStudents = async () => {
   await studentsStore.getStudents();
+}
+
+const removeStudent = async (id: number) => {
+  await studentsStore.deleteStudent(id);
 }
 onMounted(() => {
   getAllStudents();

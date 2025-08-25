@@ -17,7 +17,10 @@ export const useStudentsStore = defineStore('students', ()=> {
     const createStudent = async (student: IStudents) => {
         await studentsService.createStudent(student);
     }
+    const deleteStudent = async (studentid: number) => {
+        await studentsService.deleteStudent(studentid);
+    }
 
 
-    return { students,student, getStudents,getStudentById, createStudent }
+    return { students,student, getStudents,getStudentById, createStudent, deleteStudent }
 })

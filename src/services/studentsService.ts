@@ -55,6 +55,19 @@ class StudentsService {
             this.loading.value = false;
         }
     }
+
+    async deleteStudent(studentid: number): Promise<void> {
+        this.loading.value = true;
+        this.error.value = null;
+        try {
+            await api.delete('/students/' + studentid);
+        }
+        catch (err) {
+            this.error.value = err;
+            console.log(err);
+            throw err;
+        }
+    }
 }
 
 export const studentsService = new StudentsService();
