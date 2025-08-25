@@ -14,6 +14,10 @@ export const useStudentsStore = defineStore('students', ()=> {
         student.value = await studentsService.getStudentById(studentid);
     }
 
+    const createStudent = async (student: IStudents) => {
+        await studentsService.createStudent(student);
+    }
 
-    return { students,student, getStudents,getStudentById }
+
+    return { students,student, getStudents,getStudentById, createStudent }
 })

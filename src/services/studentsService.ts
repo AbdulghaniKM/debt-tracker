@@ -38,6 +38,23 @@ class StudentsService {
             this.loading.value = false;
         }
     }
+
+    async createStudent(student: IStudents): Promise<IStudents> {
+        this.loading.value = true;
+        this.error.value = null;
+        try {
+            await api.post('/students', student);
+            return student;
+        }
+        catch (err) {
+            this.error.value = err;
+            console.log(err);
+            throw err;
+        }
+        finally {
+            this.loading.value = false;
+        }
+    }
 }
 
 export const studentsService = new StudentsService();

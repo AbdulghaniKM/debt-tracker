@@ -12,7 +12,13 @@
         <div class="w-full">
           <AppInput label="Search for a Student" type="text" placeholder="Search Students" v-model="searchTerm"/>
         </div>
-        <AppTable :data="filteredStudents" :headers="headers"/>
+        <AppTable :formatters="{gender: (val) => val === 0 ? 'Male' : 'Female', isNerd: (val) => val === true ? 'High' : 'Normal', subjects: (val) => val.length}" :data="filteredStudents" :headers="headers">
+
+          <template  #actions="{ row }">
+            <AppButton icon="hugeicons:delete-02" @click="" icon-only variant="danger" />
+            <AppButton icon="hugeicons:view" icon-only variant="info" />
+          </template>
+        </AppTable>
       </div>
     </div>
   </div>
@@ -24,9 +30,19 @@ import {useStudentsStore} from "../stores/students";
 import {search} from "../utils";
 import AppTable from "../components/AppTable.vue";
 import AppInput from "../components/AppInput.vue";
+import AppButton from "../components/AppButton.vue";
 const searchTerm = ref('')
 const filteredStudents = computed(() => search(studentsStore.students, searchTerm.value));
-const headers = ['ID','Name', 'Age', 'Gender', 'Stage', 'Absents', 'Special?', 'Subjects']
+const headers = [
+  { key: 'id', label: 'ID' },
+  { key: 'name', label: 'Name' },
+  { key: 'age', label: 'Age' },
+  { key: 'gender', label: 'Gender' },
+  { key: 'stage', label: 'Stage' },
+  { key: 'absents', label: 'Absents' },
+  { key: 'isNerd', label: 'IQ Level' },
+  { key: 'subjects', label: 'Subjects' },
+]
 const studentsStore = useStudentsStore()
 
 const getAllStudents = async () => {
